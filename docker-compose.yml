@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 81:80
+    volumes:
+      - ./server/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./code:/code
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    image: php:7-fpm-alpine
+    volumes:
+      - ./code:/code
+
+  composer:
+    image: composer
+    volumes:
+      - ./code:/code
+  
+  mysql:
+    image: mysql
+    ports: 
+      - 82:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      #- ./data/init_data/1-structure.sql:/docker-entrypoint-initdb.d/1-file.sql
+      #- ./data/init_data/2-data.sql.gz:/docker-entrypoint-initdb.d/2-another-file.gz
+      - ./data/mysql_data:/data
+
+  #MongoDb
+  #Memcached
