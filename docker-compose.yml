@@ -21,6 +21,9 @@ services:
     image: composer
     volumes:
       - ./code:/code
+    volumes:
+      - ./code:/app
+    command: composer install 
   
   mysql:
     image: mysql
