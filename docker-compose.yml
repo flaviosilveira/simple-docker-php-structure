@@ -32,9 +32,21 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 1234
     volumes:
-      #- ./data/init_data/1-structure.sql:/docker-entrypoint-initdb.d/1-file.sql
-      #- ./data/init_data/2-data.sql.gz:/docker-entrypoint-initdb.d/2-another-file.gz
+      #- ./data/init_data/1-file.sql:/docker-entrypoint-initdb.d/1-file.sql
+      #- ./data/init_data/2-another-file.gz:/docker-entrypoint-initdb.d/2-another-file.gz
       - ./data/mysql_data:/data
 
-  #MongoDb
+  mongo:
+    image: mongo
+    ports:
+      - 83:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 1234
+    volumes:
+      #- ./data/init_data/mongo/1-file.js:/docker-entrypoint-initdb.d/1-file.js
+      #- ./data/init_data/mongo/2-another-file.sh:/docker-entrypoint-initdb.d/2-another-file.sh
+      - ./data/mongo_data:/data/db
+
+  #RabbitMQ
   #Memcached
