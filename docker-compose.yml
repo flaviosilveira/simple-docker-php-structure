@@ -13,7 +13,7 @@ services:
       - php-fpm
 
   php-fpm:
-    image: php:7-fpm-alpine
+    image: php:8-fpm-alpine
     volumes:
       - ./code:/code
 
