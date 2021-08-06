@@ -53,3 +53,13 @@ services:
       - 84:15672
 
   #Memcached
+
+x-mutagen:
+  sync:
+    defaults:
+      ignore:
+        vcs: true
+    code:
+      alpha: "."
+      beta: "volume://code"
+      mode: "two-way-resolved"
